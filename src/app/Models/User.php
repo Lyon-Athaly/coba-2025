@@ -9,6 +9,7 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar
@@ -62,8 +63,20 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         }
     }
 
+
+    // Roles
     public function canAccessPanel(Panel $panel): bool
     {
-        return true;
+        if($this->hasRole('super_admin') && $panel->getId() === 'admin') {
+            return true;
+        }
+        if ($this->hasRole('user') && $panel->getId() === 'client') {
+            return true;
+        }
+
+        Auth::logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        return false;
     }
 }

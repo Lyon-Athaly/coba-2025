@@ -23,27 +23,47 @@ class TowerResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('tower_id')
+                    ->label('Tower ID')
+                    ->rule('regex:/^[A-Z]$/')
+                    ->maxLength(1)
+                    ->required(),
+                Forms\Components\TextInput::make('jumlah_lantai')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('jumlah_unit')
+                    ->label('Jumlah Unit')
+                    ->disabled()
+                    ->dehydrated(),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                //
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+        ->columns([
+            Tables\Columns\TextColumn::make('tower_id')
+                ->label('Tower ID')
+                ->searchable()
+                ->sortable(),
+            Tables\Columns\TextColumn::make('jumlah_lantai')
+                ->label('Jumlah Lantai')
+                ->sortable(),
+            Tables\Columns\TextColumn::make('jumlah_unit')
+                ->label('Jumlah Unit')
+                ->sortable(),
+        ])
+        ->filters([
+            //
+        ])
+        ->actions([
+            Tables\Actions\EditAction::make(),
+        ])
+        ->bulkActions([
+            Tables\Actions\BulkActionGroup::make([
+                Tables\Actions\DeleteBulkAction::make(),
+            ]),
+        ]);
     }
 
     public static function getRelations(): array

@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('residents', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('nama');
+            $table->string('no_telepon');
+            $table->string('email')->unique();
+            $table->integer('umur');
             $table->timestamps();
         });
     }

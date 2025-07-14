@@ -12,6 +12,10 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Resources\Pages\CreateRecord;
+use Filament\Facades\Filament;
+
+
 
 class UnitResource extends Resource
 {
@@ -23,7 +27,25 @@ class UnitResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('Unit')
+                    ->maxLength(255)
+                    ->required(),
+                Forms\Components\TextInput::make('lantai')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('luas')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Select::make('status')
+                    ->label('Status')
+                    ->options([
+                        'tersedia' => 'Tersedia',
+                        'tidak tersedia' => 'Tidak Tersedia',
+                    ])
+                    ->required(),
+                Forms\Components\TextInput::make('tower_id')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -31,7 +53,13 @@ class UnitResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('unit_id')
+                ->searchable()
+                ->sortable(),
+                Tables\Columns\TextColumn::make('lantai'),
+                Tables\Columns\TextColumn::make('luas'),
+                Tables\Columns\TextColumn::make('status'),
+                Tables\Columns\TextColumn::make('tower_id'),
             ])
             ->filters([
                 //

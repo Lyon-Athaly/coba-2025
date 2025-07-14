@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('towers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->char('tower_id', 1);
+            $table->integer('jumlah_lantai');
+            $table->integer('jumlah_unit');
             $table->timestamps();
         });
     }

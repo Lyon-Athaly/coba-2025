@@ -23,7 +23,17 @@ class FacilityResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->label('Name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('jumlah')
+                    ->label('Jumlah')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('tower_id')
+                    ->label('Tower ID')
+                    ->required(),
             ]);
     }
 
@@ -31,7 +41,20 @@ class FacilityResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Name')
+                    ->searchable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('jumlah')
+                    ->label('Jumlah')
+                    ->sortable()
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('tower_id')
+                    ->label('Tower')
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 //

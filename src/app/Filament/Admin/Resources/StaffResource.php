@@ -31,7 +31,19 @@ class StaffResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Nama')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('posision')
+                    ->label('Jabatan')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->label('Email'),
+                Tables\Columns\TextColumn::make('telp')
+                    ->label('Telp'),
+                Tables\Columns\TextColumn::make('tower.nama')
+                    ->label('Tower'),
             ])
             ->filters([
                 //

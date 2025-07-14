@@ -27,7 +27,7 @@ class UnitResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('Unit')
+                Forms\Components\TextInput::make('unit_id')
                     ->maxLength(255)
                     ->required(),
                 Forms\Components\TextInput::make('lantai')
@@ -89,4 +89,13 @@ class UnitResource extends Resource
             'edit' => Pages\EditUnit::route('/{record}/edit'),
         ];
     }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->whereIn('tower_id', [1, 3])
+            ->orderBy('lantai')
+            ->orderBy('nomor_unit');
+    }
+
 }

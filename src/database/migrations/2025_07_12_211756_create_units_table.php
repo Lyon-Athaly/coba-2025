@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Resident::class);
+            $table->foreignIdFor(Resident::class)->nullable();
             $table->string('unit_id');
             $table->string('lantai');
             $table->string('status');

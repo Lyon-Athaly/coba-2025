@@ -39,8 +39,8 @@ class UnitResource extends Resource
                 Forms\Components\Select::make('status')
                     ->label('Status')
                     ->options([
-                        'tersedia' => 'Tersedia',
-                        'tidak tersedia' => 'Tidak Tersedia',
+                        'avaiable' => 'Avaiable',
+                        'unavaiable' => 'Unavaiable',
                     ])
                     ->required(),
                 Forms\Components\TextInput::make('tower_id')
@@ -54,15 +54,31 @@ class UnitResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('unit_id')
+                ->label('Unit ID')
                 ->searchable()
+                ->sortable()
+                ->copyable(),
+                Tables\Columns\TextColumn::make('lantai')
+                ->label('Lantai')
+                ->alignCenter()
                 ->sortable(),
-                Tables\Columns\TextColumn::make('lantai'),
                 Tables\Columns\TextColumn::make('luas'),
                 Tables\Columns\TextColumn::make('status'),
-                Tables\Columns\TextColumn::make('tower_id'),
+                Tables\Columns\TextColumn::make('tower_id')
+                ->label('Tower ID')
+                ->sortable()
+                ->badge(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('tower_id')
+                ->label('Tower')
+                ->relationship('tower', 'tower_id'),
+
+            Tables\Filters\SelectFilter::make('lantai')
+                ->label('Lantai')
+                ->options(
+                    fn () => range(1, 50) // atau ambil dari database jika dinamis
+                )
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -94,8 +110,8 @@ class UnitResource extends Resource
     {
         return parent::getEloquentQuery()
             ->whereIn('tower_id', [1, 3])
-            ->orderBy('lantai')
-            ->orderBy('nomor_unit');
+            ->orderBy('tower_id')
+            ->orderBy('unit_id');
     }
 
 }

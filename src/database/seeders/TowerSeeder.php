@@ -12,14 +12,14 @@ class TowerSeeder extends Seeder
     {
         Tower::firstOrCreate([
             'tower_id' => 'A',
-            'jumlah_lantai' => $lantaiA = 15,
-            'jumlah_unit' => 30*$lantaiA,
+            'jumlah_lantai' => $lantaiA = 10,
+            'jumlah_unit' => 20*$lantaiA,
         ]);
 
         Tower::firstOrCreate([
             'tower_id' => 'B',
-            'jumlah_lantai' => $lantaiB = 20,
-            'jumlah_unit' => 30*$lantaiB,
+            'jumlah_lantai' => $lantaiB = 10,
+            'jumlah_unit' => 20*$lantaiB,
         ]);
     }
 }

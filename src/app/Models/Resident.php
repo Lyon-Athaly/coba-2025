@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\User;
-use App\Models\Occupancy;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -23,9 +22,5 @@ class Resident extends Model
     // Relasi Resident dengan User dan Occupancy
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
-    }
-
-    public function occupancy(): HasOne {
-        return $this->hasOne(Occupancy::class);
     }
 }

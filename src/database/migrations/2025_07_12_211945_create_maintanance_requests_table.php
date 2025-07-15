@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('maintanance_requests', function (Blueprint $table) {
             $table->id();
             $table->string('unit_id');
-            $table->string('staff');
             $table->string('tanggal');
             $table->string('deskripsi');
+            $table->string('staff')->nullable();
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

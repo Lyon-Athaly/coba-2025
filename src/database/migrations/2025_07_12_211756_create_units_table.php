@@ -15,9 +15,9 @@ return new class extends Migration
         Schema::create('units', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Resident::class)->nullable();
-            $table->string('unit_id');
-            $table->string('lantai');
-            $table->string('status');
+            $table->string('unit_id')->unique();
+            $table->integer('lantai');
+            $table->string('status')->default('available');
             $table->string('luas');
             $table->string('tower_id');
             $table->timestamps();
